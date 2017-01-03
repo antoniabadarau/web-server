@@ -1,5 +1,7 @@
 package com.github.bbantonia.webserver.config;
 
+import com.github.bbantonia.webserver.logging.LogLevel;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -26,7 +28,7 @@ public class Config {
         }
     }
 
-    public String getLogLevel() {
-        return properties.getProperty("log.level");
+    public LogLevel getLogLevel() {
+        return LogLevel.fromString(properties.getProperty("log.level"));
     }
 }
