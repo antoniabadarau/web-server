@@ -1,5 +1,7 @@
 package com.github.bbantonia.webserver.logging;
 
+import java.util.Comparator;
+
 public enum LogLevel {
 
     DEBUG, INFO, WARN, ERROR;
@@ -11,5 +13,12 @@ public enum LogLevel {
             }
         }
         throw new IllegalArgumentException(String.format("Unable to find LogLevel value for string '%s'", string));
+    }
+
+    public static final class LogLevelComparator implements Comparator<LogLevel> {
+        @Override
+        public int compare(LogLevel left, LogLevel right) {
+            return left.ordinal() - right.ordinal();
+        }
     }
 }

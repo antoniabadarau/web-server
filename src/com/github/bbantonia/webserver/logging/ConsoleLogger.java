@@ -1,6 +1,6 @@
 package com.github.bbantonia.webserver.logging;
 
-public class ConsoleLogger implements Logger {
+public class ConsoleLogger extends AbstractLogger implements Logger {
 
     private final Class<?> forClazz;
 
@@ -10,16 +10,22 @@ public class ConsoleLogger implements Logger {
 
     @Override
     public void info(String message) {
-        System.out.println(message);
+        if (shouldLog(LogLevel.INFO)) {
+            System.out.println(message);
+        }
     }
 
     @Override
     public void error(String message) {
-        System.err.println(message);
+        if (shouldLog(LogLevel.ERROR)) {
+            System.err.println(message);
+        }
     }
 
     @Override
     public void error(Throwable th, String message) {
-        System.err.println(String.format("Exception: %s: %s", th.getClass().getSimpleName(), message));
+        if (shouldLog(LogLevel.ERROR)) {
+            System.err.println(String.format("Exception: %s: %s", th.getClass().getSimpleName(), message));
+        }
     }
 }
