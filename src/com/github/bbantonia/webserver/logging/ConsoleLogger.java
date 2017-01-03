@@ -1,4 +1,4 @@
-package com.github.bbantonia.webserver;
+package com.github.bbantonia.webserver.logging;
 
 public class ConsoleLogger implements Logger {
 
