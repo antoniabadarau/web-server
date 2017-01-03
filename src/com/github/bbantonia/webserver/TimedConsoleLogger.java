@@ -2,6 +2,12 @@ package com.github.bbantonia.webserver;
 
 public class TimedConsoleLogger implements Logger {
 
+    private final Class<?> forClazz;
+
+    public TimedConsoleLogger(Class<?> forClazz) {
+        this.forClazz = forClazz;
+    }
+
     private static Long now() {
         return System.currentTimeMillis();
     }

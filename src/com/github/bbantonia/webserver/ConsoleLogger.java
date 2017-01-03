@@ -1,6 +1,13 @@
 package com.github.bbantonia.webserver;
 
 public class ConsoleLogger implements Logger {
+
+    private final Class<?> forClazz;
+
+    public ConsoleLogger(Class<?> forClazz) {
+        this.forClazz = forClazz;
+    }
+
     @Override
     public void info(String message) {
         System.out.println(message);
