@@ -1,5 +1,7 @@
 package com.github.bbantonia.webserver.logging;
 
+import java.io.PrintStream;
+
 public class TimedConsoleLogger extends AbstractLogger implements Logger {
 
     private final Class<?> forClazz;
@@ -13,23 +15,19 @@ public class TimedConsoleLogger extends AbstractLogger implements Logger {
     }
 
     @Override
-    public void info(String message) {
-        if (shouldLog(LogLevel.INFO)) {
-            System.out.println(now() + ": " + message);
+    protected void log(LogLevel level, String message) {
+        if (shouldLog(level)) {
+            PrintStream stream = level == LogLevel.ERROR ? System.err : System.out;
+            stream.println(String.format("[%s] - [%s]: %s", level.name(), forClazz.getCanonicalName(), message));
         }
     }
 
     @Override
-    public void error(String message) {
-        if (shouldLog(LogLevel.ERROR)) {
-            System.err.println(now() + ": " + message);
-        }
-    }
-
-    @Override
-    public void error(Throwable th, String message) {
-        if (shouldLog(LogLevel.ERROR)) {
-            System.err.println(String.format("%s: Exception: %s: %s", now(), th.getClass().getSimpleName(), message));
+    protected void log(LogLevel level, Throwable th, String message) {
+        if (shouldLog(level)) {
+            PrintStream stream = level == LogLevel.ERROR ? System.err : System.out;
+            stream.println(String.format("[%s] - [%s] - [%s]: %s", now(), level.name(), forClazz.getCanonicalName(), message));
+            th.printStackTrace(stream);
         }
     }
 }
