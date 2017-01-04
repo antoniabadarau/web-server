@@ -35,4 +35,8 @@ public class Config {
     public Integer getListenPort() {
         return Integer.parseInt(properties.getProperty("listen.port"));
     }
+
+    public String getLoggerType() {
+        return properties.getProperty("logger.type");
+    }
 }
