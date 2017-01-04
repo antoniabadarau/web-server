@@ -31,4 +31,8 @@ public class Config {
     public LogLevel getLogLevel() {
         return LogLevel.fromString(properties.getProperty("log.level"));
     }
+
+    public Integer getListenPort() {
+        return Integer.parseInt(properties.getProperty("listen.port"));
+    }
 }
